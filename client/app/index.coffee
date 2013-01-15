@@ -14,7 +14,17 @@ class App extends Spine.Controller
 
   fetch_the_data: (e) ->
     # The button has been clicked, lets do somthing
-    @log 'fetching_the_data', e.type
+    @log 'fetching the data', e.type
+
+    jQuery.ajax
+      url: 'http://localhost:5000/data.json'
+      crossDomain: true
+      success: @got_the_data
+      error: (hdr) => alert('There was an error with your request')
+
+  got_the_data: (data) =>
+    'Called when the ajax response succeeds'
+    @log 'Got the data', data
 
 
 module.exports = App
